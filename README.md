@@ -14,18 +14,30 @@ Esta primera entrega corresponde a la base arquitectónica del proyecto, organiz
 - Nodemon
 - JavaScript (ES Modules)
 
+## Arquitectura
+
+El proyecto está organizado siguiendo una arquitectura por capas para separar responsabilidades y facilitar el mantenimiento y la escalabilidad de la aplicación.
+
+- **Routes:** definen los endpoints de la API.
+- **Controllers:** reciben las peticiones HTTP y envían las respuestas.
+- **Services:** contienen la lógica de negocio.
+- **Repositories:** actúan como intermediarios entre los servicios y el acceso a datos.
+- **DAO (Data Access Object):** encapsulan el acceso a la fuente de datos.
+- **Models:** representan las entidades principales del sistema.
+- **Config:** centraliza la configuración de la aplicación.
+
 ## Instalación
 
 Clonar el repositorio:
 
 ```bash
-git clone URL_DEL_REPOSITORIO
+git https://github.com/NicolasSoraiz/Pre-Entrega-1-Backend-II.git
 ```
 
 Ingresar al proyecto:
 
 ```bash
-cd proyectos-eventos
+cd Pre-Entrega-1-Backend-II
 ```
 
 Instalar dependencias:
@@ -38,10 +50,12 @@ npm install
 
 Crear un archivo `.env` con las siguientes variables:
 
-- PORT
-- NODE_ENV
-- MONGO_URL
-- JWT_SECRET
+```env
+PORT=3000
+NODE_ENV=development
+MONGO_URL=mongodb://localhost:27017/proyectos-eventos
+JWT_SECRET=secret123
+```
 
 ## Ejecutar el servidor
 
@@ -60,18 +74,25 @@ npm start
 ## Estructura del proyecto
 
 ```text
-src/
-├── config/
-├── controllers/
-├── dao/
-├── middlewares/
-├── models/
-├── repositories/
-├── routes/
-├── services/
-├── utils/
-├── app.js
-└── server.js
+proyectos-eventos/
+│
+├── src/
+│   ├── config/
+│   ├── controllers/
+│   ├── dao/
+│   ├── middlewares/
+│   ├── models/
+│   ├── repositories/
+│   ├── routes/
+│   ├── services/
+│   ├── utils/
+│   ├── app.js
+│   └── server.js
+│
+├── .env.example
+├── .gitignore
+├── package.json
+└── README.md
 ```
 
 ## Rutas disponibles
@@ -111,6 +132,6 @@ Respuesta:
 ```json
 {
   "status": "success",
-  "message": "Ruta de sessions disponible"
+  "payload": []
 }
 ```

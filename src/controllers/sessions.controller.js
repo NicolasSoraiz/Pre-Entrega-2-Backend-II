@@ -1,6 +1,11 @@
+import { getSessionsService } from "../services/sessions.service.js";
+
 export const getSessions = (req, res) => {
-    res.status(200).json({
+    const sessions = getSessionsService();
+
+    return res.status(200).json({
         status: "success",
-        message: "Ruta de sessions disponible"
+        payload: sessions
     });
+
 };
