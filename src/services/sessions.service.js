@@ -1,5 +1,6 @@
 import { getUserByEmail, saveUser } from "../repositories/users.repository.js";
-import { hashPassword } from "../utils/hash.js";
+import { hashPassword, comparePassword } from "../utils/hash.js";
+import { generateToken } from "../utils/jwt.js";
 
 export const registerUser = async ({
     first_name,
@@ -50,4 +51,39 @@ export const registerUser = async ({
     });
 
     return newUser;
+};
+
+export const loginUser = async (email, password) => {
+    if (!email || !password) {
+        const error = new Error("Credenciales inválidas");
+        error.statusCode = 401;
+        throw error;
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const user = await getUserByEmail(normalizedEmail);
+
+    if (!user) {
+        const error = new Error("Credenciales inválidas");
+        error.statusCode = 401;
+        throw error;
+    }
+
+    const isPasswordValid = await comparePassword(
+        password,
+        user.password
+    );
+
+    if (!isPasswordValid) {
+        const error = new Error("Credenciales inválidas");
+        error.statusCode = 401;
+        throw error;
+    }
+
+    const token = generateToken(user);
+
+    return {
+        token
+    };
 };
