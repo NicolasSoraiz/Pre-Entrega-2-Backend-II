@@ -42,7 +42,7 @@ El proyecto está organizado siguiendo una arquitectura por capas para separar r
 Clonar el repositorio:
 
 ```bash
-git clone 
+git clone https://github.com/NicolasSoraiz/Pre-Entrega-3-Backend-II.git
 ```
 
 Ingresar al proyecto:
